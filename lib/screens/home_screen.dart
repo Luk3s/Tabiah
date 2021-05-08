@@ -1,36 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tabiah/core/app_config.dart';
+import 'package:tabiah/core/app_flavor.dart';
 
-void main() {
-  runApp(
-    const MyApp(),
-  );
-}
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({required this.config, Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final AppConfig config;
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({required this.title, Key? key}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -43,7 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.config.flavor.map(
+            prod: () => 'tabiah',
+            dev: () => '[DEV] tabiah',
+          ),
+        ),
       ),
       body: Center(
         child: Column(
